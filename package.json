@@ -1,0 +1,22 @@
+{
+  "name": "pong",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JeroenVinke/pong.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JeroenVinke/pong/issues"
+  },
+  "homepage": "https://github.com/JeroenVinke/pong",
+  "devDependencies": {
+    "socket.io": "^1.4.5"
+  }
+}
