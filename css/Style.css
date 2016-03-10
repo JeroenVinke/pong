@@ -1,6 +1,10 @@
 @font-face {
-    font-family: Arcade;
-    src: url(/fonts/ARCADECLASSIC.TTF);
+    font-family: 'arcade';
+    src: url('../fonts/ARCADECLASSIC.TTF');
+}
+@font-face {
+    font-family: 'digi';
+    src: url('../fonts/DS-DIGI.TTF');
 }
 #content {
     width:80%;
@@ -29,7 +33,7 @@ nav ul li {
     display:inline-block;
     padding:15px;
     font-size:25px;
-    font-family: Arcade, Fallback, sans-serif;
+    font-family: 'digi', Fallback, sans-serif;
 }
 
 nav ul li:hover {
@@ -38,7 +42,6 @@ nav ul li:hover {
 
 header {
     height:150px;
-    font-family: Arcade, Fallback, sans-serif;
 }
 
 section {
