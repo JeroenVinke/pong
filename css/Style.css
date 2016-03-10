@@ -1,0 +1,66 @@
+@font-face {
+    font-family: Arcade;
+    src: url(/fonts/ARCADECLASSIC.TTF);
+}
+#content {
+    width:80%;
+    padding-left:10%;
+}
+
+a {
+    text-decoration:none;
+    color:white;
+}
+
+body {
+    background-color: #E2E2E2;
+}
+nav{
+    height:60px;
+    background-color: #195153;
+    color:#FFFFFF;
+}
+
+nav ul {
+    list-style-type: none;
+}
+
+nav ul li {
+    display:inline-block;
+    padding:15px;
+    font-size:25px;
+    font-family: Arcade, Fallback, sans-serif;
+}
+
+nav ul li:hover {
+    background-color: #0d4144;
+}
+
+header {
+    height:150px;
+    font-family: Arcade, Fallback, sans-serif;
+}
+
+section {
+    min-height:400px;
+    background-color: #a4b6b3;
+}
+
+#logo{
+    padding:20px;
+    display:inline-block;
+    height:100px;
+    width:100px;
+}
+
+#logo .fa{
+    font-size: 80px;
+}
+
+#name{
+    padding:20px;
+    display:inline-block;
+    font-size:60px;
+    font-family: 'Arcade', Fallback, sans-serif;
+}
+
