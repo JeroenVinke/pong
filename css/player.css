@@ -1,0 +1,36 @@
+.player {
+  background-color: black;
+  position: absolute;
+}
+
+.currentPlayer {
+  background-color: blue;
+}
+
+#player1 {
+  left: 0;
+  top: 0;
+  height: 100px;
+  width: 30px;
+}
+
+#player2 {
+  right: 0;
+  top: 0;
+  height: 30px;
+  width: 100px;
+}
+
+#player3 {
+  bottom: 0;
+  right: 0;
+  height: 100px;
+  width: 30px;
+}
+
+#player4 {
+  left: 0;
+  bottom: 0;
+  height: 30px;
+  width: 100px;
+}

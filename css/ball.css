@@ -1,0 +1,7 @@
+#ball {
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  background-color: black;
+  position: absolute;
+}
