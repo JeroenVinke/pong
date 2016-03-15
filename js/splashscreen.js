@@ -18,9 +18,10 @@ socket.on('GameStatus', function (data) {
 socket.on('PlayerJoined', function (data) {
   console.log('PlayerJoined', data);
 
-  // if(data.player1 && data.player2) {
-  //   window.location = 'game.html';
-  // }
+  if(data.player1 && data.player2) {
+    window.location = 'game.html';
+  }
+
   $("#playerTable").css("display","block");
   $("#playerTableBody").empty();
 

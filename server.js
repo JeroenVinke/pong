@@ -38,7 +38,7 @@ io.sockets.on("connection", function(socket) {
       }
     }
 
-    io.sockets.emit.emit('PlayerJoined', game);
+    io.sockets.emit('PlayerJoined', game);
   });
 });
 
