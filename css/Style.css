@@ -6,6 +6,12 @@
     font-family: 'digi';
     src: url('../fonts/DS-DIGI.TTF');
 }
+
+body{
+    background-image:url(../images/background.png);
+    background-size:cover;
+}
+
 #content {
     width:80%;
     padding-left:10%;
@@ -16,9 +22,6 @@ a {
     color:white;
 }
 
-body {
-    background-color: #E2E2E2;
-}
 nav{
     height:60px;
     background-color: #195153;
@@ -56,6 +59,7 @@ section {
     display:inline-block;
     height:100px;
     width:100px;
+    color: #FFFFFF;
 }
 
 #logo .fa{
@@ -67,11 +71,11 @@ section {
     display:inline-block;
     font-size:60px;
     font-family: 'Arcade', Fallback, sans-serif;
+    color: #FFFFFF;
 }
 
 .game{
     display:none;
-    background-color: #58b69b;
 }
 
 label {
@@ -98,3 +102,18 @@ input, select{
     margin-top: 10px;
 }
 
+button {
+    padding: 50px;
+    background-color: #195153;
+    border: 1px solid #1F6265;
+    border-radius: 6px;
+    color: #FFFFFF;
+    font-family: 'Arcade', Fallback, sans-serif;
+    font-size: 2.0em;
+    margin: 50px;
+}
+
+button:hover{
+    cursor: pointer;
+    background-color: #0d4144;
+}
