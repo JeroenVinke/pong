@@ -5,16 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Pong</title>
   <link rel="stylesheet" type="text/css" href="css/Style.css">
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js"></script>
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js"></script>
   <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
   <script src="js/splashscreen.js"></script>
+  <script src="js/index.js"></script>
 </head>
 
 <body>
-  <button onclick='startGame()'>Start game</button>
+
 
   <div id="content">
   <header>
@@ -23,11 +23,19 @@
   </header>
   <nav>
     <ul>
-      <a href="#join"><li>Join Game</li></a>
-      <a href="#new"><li>New Game</li></a>
-        <a href="#current"><li>Running Games</li></a>
+      <li class="navInfo" data-target="section.info.s-h">My info</li>
+        <li class="navGame" data-target="section.game.s-h">Join game</li>
     </ul>
   </nav>
-  <section></section>
+    <section class="info s-h">
+      <form>
+        <label>Username</label><input type="text">
+        <label>Color</label><select id="colorSelect"><option value="green">green</option><option value="blue">blue</option><option value="yellow">yellow</option><option value="red">red</option></select>
+        <div id="colorPreview"></div>
+      </form>
+      </form>
+    </section>
+    <section class="game s-h">   <button onclick='startGame()'>Start game</button> </section>
   </div>
+</body>
 </html>
