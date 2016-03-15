@@ -156,3 +156,29 @@ tbody tr{
 }
 
 
+/* -------------responsive----------------*/
+@media screen and (max-width: 890px) {
+
+#logo{
+    height: 60px;
+    width: 60px;
+}
+
+#name{
+    font-size: 30px;
+}
+
+.left, .right{
+    width:100%;
+    clear:both
+    float:none;
+}
+    th, td {
+        font-size: 0.7em;
+    }
+    input,select{
+        width: 80%;
+    }
+
+}
+
