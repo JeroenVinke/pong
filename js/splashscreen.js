@@ -18,9 +18,7 @@ socket.on('GameStatus', function (data) {
 socket.on('PlayerJoined', function (data) {
   console.log('PlayerJoined', data);
 
-  if(data.player1 && data.player2) {
-    window.location = 'game.html';
-  }
+
 
   $("#playerTable").css("display","block");
   $("#playerTableBody").empty();
@@ -31,12 +29,21 @@ socket.on('PlayerJoined', function (data) {
     $("#playerTableBody").append("<tr><td>player1</td><td>" + data.player1.username + "</td><td style='background-color:"+data.player1.color+" '>" + data.player1.color + "</td></tr>");
     $("#playerTableBody").append("<tr><td>player2</td><td>" + data.player2.username + "</td><td style='background-color:"+data.player2.color+" '>"+ data.player2.color + "</td></tr>");
   }
+  if(data.player1 && data.player2) {
+    $("#playerTableBody").append("<tr class='loading'><td colspan='3'>loading game!..........</td></tr>");
+    var newcontent ="<div class='sk-circle'><div class='sk-circle1 sk-child'></div><div class='sk-circle2 sk-child'></div><div class='sk-circle3 sk-child'></div><div class='sk-circle4 sk-child'></div><div class='sk-circle5 sk-child'></div> <div class='sk-circle6 sk-child'></div> <div class='sk-circle7 sk-child'></div> <div class='sk-circle8 sk-child'></div> <div class='sk-circle9 sk-child'></div> <div class='sk-circle10 sk-child'></div> <div class='sk-circle11 sk-child'></div> <div class='sk-circle12 sk-child'></div> </div>";
+    $('.left').empty().append(newcontent);
+    setTimeout(GoToGame, 4000);
+
+  }
 });
 
+function GoToGame() {
+  window.location = 'game.html'
+}
 
 
-
-$(function () {
+  $(function () {
   var username = localStorage.getItem('username');
   var color = localStorage.getItem('color');
 
