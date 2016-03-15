@@ -14,8 +14,6 @@
 </head>
 
 <body>
-
-
   <div id="content">
   <header>
     <div id="logo"><i class="fa fa-circle"></i></div>
@@ -29,13 +27,34 @@
   </nav>
     <section class="info s-h">
       <form>
-        <label>Username</label><input type="text">
+        <label>Username</label><input type="text" id="username">
         <label>Color</label><select id="colorSelect"><option value="green">green</option><option value="blue">blue</option><option value="yellow">yellow</option><option value="red">red</option></select>
         <div id="colorPreview"></div>
       </form>
       </form>
     </section>
-    <section class="game s-h">   <button onclick="window.location.href='/pong/game.html'">Start game</button> </section>
+    <section class="game s-h">
+      <div class="left">
+        <button onclick="joinGame()">Join game</button>
+      </div>
+    <div class="right">
+      <table>
+        <thead>
+        <tr>
+          <th>Player number</th>
+          <th>username</th>
+          <th>color</th>
+        </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>1</th>
+            <th>Edd92</th>
+            <th>Green</th>
+          </tr>
+        </tbody>
+      </table>
+    </div></section>
   </div>
 </body>
 </html>

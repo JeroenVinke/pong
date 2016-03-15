@@ -117,3 +117,38 @@ button:hover{
     cursor: pointer;
     background-color: #0d4144;
 }
+
+.left{
+    width:50%;
+    float:left;
+}
+
+.right{
+    width:50%;
+    float:right;
+}
+
+/* -------------table styling------------------*/
+table{
+    font-family: 'Arcade', Fallback, sans-serif;
+}
+
+thead tr{
+    background-color:#195153;
+    padding:10px;
+    color:#FFFFFF;
+    font-size:1.5em;
+}
+
+th,td{
+    padding:10px;
+}
+
+
+
+tbody tr{
+    background-color:#CACACA;
+    padding:10px;
+}
+
+
