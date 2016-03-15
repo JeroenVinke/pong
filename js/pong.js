@@ -1,4 +1,5 @@
 var socket = io.connect("http://localhost:8000");
+
 var animate = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || function (callback) {
         window.setTimeout(callback, 1000 / 60)
     };
@@ -16,7 +17,8 @@ var keysDown = {};
 
 
 socket.on('PlayerMoved', function (data) {
-  console.log(data);
+    computer.update(data);
+    //console.log(data);
 });
 
 var render = function () {
@@ -29,7 +31,7 @@ var render = function () {
 
 var update = function () {
     player.update();
-    computer.update(ball);
+    //computer.update(ball);
     ball.update(player.paddle, computer.paddle);
 };
 
@@ -53,9 +55,20 @@ Paddle.prototype.render = function () {
     context.fillRect(this.x, this.y, this.width, this.height);
 };
 
-Paddle.prototype.move = function (x, y) {
-    this.x += x;
-    this.y += y;
+Paddle.prototype.move = function (x, y, player) {
+    if(player==true){
+        this.x = x;
+        this.y = y;
+    } else {
+        this.x += x;
+        this.y += y;
+        socket.emit("PlayerMoved", {
+            x: this.x,
+            y: this.y,
+            width: width,
+            height: height
+        });
+    }
     this.x_speed = x;
     this.y_speed = y;
     if (this.x < 0) {
@@ -66,10 +79,6 @@ Paddle.prototype.move = function (x, y) {
         this.x_speed = 0;
     }
 
-    socket.emit('PlayerMoved', {
-      x: this.x,
-      y: this.y
-    });
 };
 
 function Computer() {
@@ -80,20 +89,21 @@ Computer.prototype.render = function () {
     this.paddle.render();
 };
 
-Computer.prototype.update = function (ball) {
-    // var x_pos = ball.x;
-    // var diff = -((this.paddle.x + (this.paddle.width / 2)) - x_pos);
-    // if (diff < 0 && diff < -4) {
-    //     diff = -5;
-    // } else if (diff > 0 && diff > 4) {
-    //     diff = 5;
-    // }
-    // this.paddle.move(diff, 0);
-    // if (this.paddle.x < 0) {
-    //     this.paddle.x = 0;
-    // } else if (this.paddle.x + this.paddle.width > 400) {
-    //     this.paddle.x = 400 - this.paddle.width;
-    // }
+Computer.prototype.update = function (playerMove) {
+     var x_pos = playerMove.x;
+    console.log(this);
+     var diff = -((this.paddle.x + (this.paddle.width / 2)) - x_pos);
+     if (diff < 0 && diff < -4) {
+         diff = -5;
+     } else if (diff > 0 && diff > 4) {
+         diff = 5;
+     }
+     this.paddle.move(diff, 0, false);
+     if (this.paddle.x < 0) {
+         this.paddle.x = 0;
+     } else if (this.paddle.x + this.paddle.width > 400) {
+         this.paddle.x = 400 - this.paddle.width;
+     }
 };
 
 function Player() {
@@ -108,15 +118,13 @@ Player.prototype.update = function () {
     for (var key in keysDown) {
         var value = Number(key);
         if (value == 37) {
-            this.paddle.move(-4, 0);
+            this.paddle.move(-4, 0, true);
         } else if (value == 39) {
-            this.paddle.move(4, 0);
+            this.paddle.move(4, 0, true);
         } else {
-            this.paddle.move(0, 0);
+            this.paddle.move(0, 0, true);
         }
     }
-
-
 };
 
 function Ball(x, y) {
