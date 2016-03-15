@@ -17,12 +17,14 @@ socket.on('GameStatus', function (data) {
 
 socket.on('PlayerJoined', function (data) {
   console.log('PlayerJoined', data);
+
+  // if(data.player1 && data.player2) {
+  //   window.location = 'game.html';
+  // }
 });
 
 
-socket.on('GameStart', function (data) {
-  console.log('GameStart', data);
-});
+
 
 $(function () {
   var username = localStorage.getItem('username');

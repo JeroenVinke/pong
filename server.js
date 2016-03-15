@@ -27,19 +27,18 @@ io.sockets.on("connection", function(socket) {
 
   socket.on('JoinGame', function(playerInfo) {
 
+    // nieuw spel starten als alle plekken bezet zijn
     if(game.player1 && game.player2) game = {};
 
     if(!game.player1) {
       game.player1 = playerInfo;
     } else if(!game.player2) {
-      game.player2 = playerInfo;
+      if(game.player1.username != playerInfo.username) {
+        game.player2 = playerInfo;
+      }
     }
 
-    socket.emit('PlayerJoined', game);
-
-    if(game.player1 && game.player2) {
-      socket.broadcast.emit('GameStart', game);
-    }
+    io.sockets.emit.emit('PlayerJoined', game);
   });
 });
 
