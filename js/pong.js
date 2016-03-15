@@ -1,3 +1,4 @@
+var socket = io.connect("http://localhost:8000");
 var animate = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || function (callback) {
         window.setTimeout(callback, 1000 / 60)
     };
@@ -12,6 +13,11 @@ var computer = new Computer();
 var ball = new Ball(200, 300);
 
 var keysDown = {};
+
+
+socket.on('PlayerMoved', function (data) {
+  console.log(data);
+});
 
 var render = function () {
     context.fillStyle = "#a4b6b3";
@@ -59,6 +65,11 @@ Paddle.prototype.move = function (x, y) {
         this.x = 400 - this.width;
         this.x_speed = 0;
     }
+
+    socket.emit('PlayerMoved', {
+      x: this.x,
+      y: this.y
+    });
 };
 
 function Computer() {
@@ -70,19 +81,19 @@ Computer.prototype.render = function () {
 };
 
 Computer.prototype.update = function (ball) {
-    var x_pos = ball.x;
-    var diff = -((this.paddle.x + (this.paddle.width / 2)) - x_pos);
-    if (diff < 0 && diff < -4) {
-        diff = -5;
-    } else if (diff > 0 && diff > 4) {
-        diff = 5;
-    }
-    this.paddle.move(diff, 0);
-    if (this.paddle.x < 0) {
-        this.paddle.x = 0;
-    } else if (this.paddle.x + this.paddle.width > 400) {
-        this.paddle.x = 400 - this.paddle.width;
-    }
+    // var x_pos = ball.x;
+    // var diff = -((this.paddle.x + (this.paddle.width / 2)) - x_pos);
+    // if (diff < 0 && diff < -4) {
+    //     diff = -5;
+    // } else if (diff > 0 && diff > 4) {
+    //     diff = 5;
+    // }
+    // this.paddle.move(diff, 0);
+    // if (this.paddle.x < 0) {
+    //     this.paddle.x = 0;
+    // } else if (this.paddle.x + this.paddle.width > 400) {
+    //     this.paddle.x = 400 - this.paddle.width;
+    // }
 };
 
 function Player() {
@@ -104,6 +115,8 @@ Player.prototype.update = function () {
             this.paddle.move(0, 0);
         }
     }
+
+
 };
 
 function Ball(x, y) {

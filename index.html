@@ -14,8 +14,6 @@
 </head>
 
 <body>
-
-
   <div id="content">
   <header>
     <div id="logo"><i class="fa fa-circle"></i></div>
@@ -29,7 +27,7 @@
   </nav>
     <section class="info s-h">
       <form>
-        <label>Username</label><input type="text">
+        <label>Username</label><input type="text" id="username">
         <label>Color</label><select id="colorSelect"><option value="green">green</option><option value="blue">blue</option><option value="yellow">yellow</option><option value="red">red</option></select>
         <div id="colorPreview"></div>
       </form>
@@ -57,6 +55,7 @@
         </tbody>
       </table>
     </div></section>
+    <section class="game s-h">   <button onclick="joinGame()">Start game</button> </section>
   </div>
 </body>
 </html>

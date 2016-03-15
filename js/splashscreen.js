@@ -1,10 +1,19 @@
 var socket = io.connect("http://localhost:8000");
 
-socket.on('GameStart', function () {
-  console.log('GameStart');
+function joinGame() {
+  console.log(socket);
+  socket.emit('JoinGame', {
+    username: $("#username").val(),
+    color: $("#colorSelect").val()
+  });
+}
+
+
+socket.on('PlayerJoined', function (data) {
+  console.log('PlayerJoined', data);
 });
 
 
-function startGame() {
-  socket.emit('GameStart', 'test');
-}
+socket.on('GameStart', function (data) {
+  console.log('GameStart', data);
+});
