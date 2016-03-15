@@ -21,6 +21,10 @@ io.sockets.on("connection", function(socket) {
 
   proxy(socket, 'PlayerMoved');
 
+  socket.on('GameStatus', function () {
+    socket.emit('GameStatus', game);
+  });
+
   socket.on('JoinGame', function(playerInfo) {
 
     if(game.player1 && game.player2) game = {};
