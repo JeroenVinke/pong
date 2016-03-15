@@ -17,6 +17,19 @@ socket.on('GameStatus', function (data) {
 
 socket.on('PlayerJoined', function (data) {
   console.log('PlayerJoined', data);
+
+  $("#playerTable").css("display","block");
+  $("#playerTableBody").empty();
+
+  if(data.player1 !=null && data.player2==null){
+    $("#playerTableBody").append("<tr><td>player1</td><td>" + data.player1.username + "</td><td style='background-color:"+data.player1.color+" '>" + data.player1.color + "</td></tr>");
+  } else if (data.player1 !=null && data.player2!=null){
+    $("#playerTableBody").append("<tr><td>player1</td><td>" + data.player1.username + "</td><td style='background-color:"+data.player1.color+" '>" + data.player1.color + "</td></tr>");
+    $("#playerTableBody").append("<tr><td>player2</td><td>" + data.player2.username + "</td><td style='background-color:"+data.player2.color+" '>"+ data.player2.color + "</td></tr>");
+  }
+
+
+
 });
 
 

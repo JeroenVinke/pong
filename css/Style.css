@@ -151,4 +151,8 @@ tbody tr{
     padding:10px;
 }
 
+#playerTable{
+    display:none;
+}
+
 
