@@ -1,30 +1,60 @@
-function Ball() {
+function Ball(div) {
+  this.div = $("#ball");
   this.position = {
-    x: 0,
-    y: 0
+    y: 350,
+    x: 300
   };
   this.angle = 90;
   this.speed = 10;
   this.size = 15;
+  $(this.div).css({top: this.position.y, left: this.position.x  });
 }
 
-var ball = new Ball();
+
+var ball;
 
 $(function () {
-  var distance = fieldSize - ball.size;
-  var multiplier = 40;
-  var time = (distance / ball.speed) * multiplier;
+  ball = new Ball();
 
-  $("#ball").velocity({
-    left: "+=" + distance,
-    top: "+=" + distance
-  }, {
-    progress: function(elements, complete, remaining, start, tweenValue) {
-      console.log($(elements[0]).offset());
-      // console.log((complete * 100) + "%");
-      // console.log(remaining + "ms remaining!");
-      // console.log(start + " start!");
-      // console.log("The current tween value is " + tweenValue)
-    }
+  var distance = fieldSize - ball.size;
+
+  startAnimation({
+    left: distance
   });
 });
+
+function startAnimation(target) {
+
+
+  var distance = fieldSize - ball.size;
+
+
+  $("#ball").velocity(target, {
+    easing: 'linear',
+    duration: 500,
+    progress: function(elements, complete, remaining, start, tweenValue) {
+      var collisions = ball.div.collidesWith(".player");
+
+      if(collisions.length > 0) {
+        console.log(getAngle(collisions[0]));
+        $(ball.div).velocity("stop");
+
+        startAnimation({
+          left: 0
+        });
+      }
+    },
+    complete: function(elements) {
+      console.log("DOOD");
+    }
+  });
+}
+
+function getAngle(player) {
+  var playerPos = $(player).position();
+  var ballPos = $(ball.div).position();
+
+  console.log();
+  console.log();
+  console.log(playerPos.top - ballPos.top);
+}

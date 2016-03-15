@@ -6,16 +6,9 @@ $(function () {
 function bindArrowKeys() {
   $(document).keydown(function(e) {
     switch(e.which) {
-        case 37: // left
-          onLeft();
-        break;
 
         case 38: // up
           onUp();
-        break;
-
-        case 39: // right
-          onRight();
         break;
 
         case 40: // down
@@ -37,28 +30,13 @@ socket.on('GameStart', function (game) {
 
 });
 
-function onLeft() {
-  if(!currentPlayer % 2 === 0) {
-    move("left");
-  }
-}
-
 function onUp() {
-  if(currentPlayer % 2) {
-    move("up");
-  }
+  move("up");
 }
 
-function onRight() {
-  if(!currentPlayer % 2 === 0) {
-    move("right");
-  }
-}
 
 function onDown() {
-  if(currentPlayer % 2) {
-    move("down");
-  }
+  move("down");
 }
 
 function move(direction) {
@@ -77,14 +55,6 @@ function move(direction) {
     } else if(direction === "up") {
       if(offset.top - stepSize > 0) {
         player.offset({top: offset.top - stepSize });
-      }
-    } else if(direction === "left") {
-      if(offset.left - stepSize > 0) {
-        player.offset({left: offset.left - stepSize });
-      }
-    } else if(direction === "right") {
-      if(offset.left + stepSize + playerWidth - borderSize <= fieldSize) {
-        player.offset({left: offset.left + stepSize });
       }
     }
   }
