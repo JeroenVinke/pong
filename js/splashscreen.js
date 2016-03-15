@@ -18,6 +18,10 @@ socket.on('GameStatus', function (data) {
 socket.on('PlayerJoined', function (data) {
   console.log('PlayerJoined', data);
 
+  if(data.player1 && data.player2) {
+    window.location = 'game.html';
+  }
+
   $("#playerTable").css("display","block");
   $("#playerTableBody").empty();
 
@@ -27,15 +31,10 @@ socket.on('PlayerJoined', function (data) {
     $("#playerTableBody").append("<tr><td>player1</td><td>" + data.player1.username + "</td><td style='background-color:"+data.player1.color+" '>" + data.player1.color + "</td></tr>");
     $("#playerTableBody").append("<tr><td>player2</td><td>" + data.player2.username + "</td><td style='background-color:"+data.player2.color+" '>"+ data.player2.color + "</td></tr>");
   }
-
-
-
 });
 
 
-socket.on('GameStart', function (data) {
-  console.log('GameStart', data);
-});
+
 
 $(function () {
   var username = localStorage.getItem('username');
