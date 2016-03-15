@@ -9,16 +9,30 @@ var height = 600;
 canvas.width = width;
 canvas.height = height;
 var context = canvas.getContext('2d');
-var player = new Player();
-var computer = new Computer();
+//var player = new Player();
+//var computer = new Computer();
+var player = null;
+var computer = null;
 var ball = new Ball(200, 300);
-
+var Iam = "";
 var keysDown = {};
 
+socket.on("GameStatus", function(data){
+    var username = localStorage.getItem("username");
+    if(data.player1.username == username){
+        Iam = 'player1';
+        socket.emit('Ready', 'player1');
+    } else {
+        Iam = 'player2';
+        socket.emit('Ready', 'player2');
+    }
+    player = new Player();
+    computer = new Computer();
+});
 
 socket.on('PlayerMoved', function (data) {
     computer.update(data);
-    //console.log(data);
+    console.log(data);
 });
 
 var render = function () {
@@ -82,7 +96,11 @@ Paddle.prototype.move = function (x, y, player) {
 };
 
 function Computer() {
-    this.paddle = new Paddle(175, 10, 50, 10);
+    if(Iam == 'player2') {
+        this.paddle = new Paddle(175, 580, 50, 10);
+    } else {
+        this.paddle = new Paddle(175, 10, 50, 10);
+    }
 }
 
 Computer.prototype.render = function () {
@@ -91,7 +109,6 @@ Computer.prototype.render = function () {
 
 Computer.prototype.update = function (playerMove) {
      var x_pos = playerMove.x;
-    console.log(this);
      var diff = -((this.paddle.x + (this.paddle.width / 2)) - x_pos);
      if (diff < 0 && diff < -4) {
          diff = -5;
@@ -107,7 +124,11 @@ Computer.prototype.update = function (playerMove) {
 };
 
 function Player() {
-    this.paddle = new Paddle(175, 580, 50, 10);
+    if(Iam=='player1') {
+        this.paddle = new Paddle(175, 580, 50, 10);
+    } else {
+        this.paddle = new Paddle(175, 10, 50, 10);
+    }
 }
 
 Player.prototype.render = function () {
@@ -180,7 +201,10 @@ Ball.prototype.update = function (paddle1, paddle2) {
 };
 
 document.body.appendChild(canvas);
-animate(step);
+socket.on('GameStart', function()
+{
+    animate(step);
+});
 
 window.addEventListener("keydown", function (event) {
     keysDown[event.keyCode] = true;
