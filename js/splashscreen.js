@@ -9,6 +9,12 @@ function joinGame() {
 }
 
 
+socket.emit('GameStatus');
+
+socket.on('GameStatus', function (data) {
+  console.log(data);
+});
+
 socket.on('PlayerJoined', function (data) {
   console.log('PlayerJoined', data);
 });
