@@ -18,11 +18,7 @@ io.listen(server);
 io.sockets.on("connection", function(socket) {
   console.log("user connected: " + socket.id);
 
-  proxy(socket, 'GameStarted');
-  proxy(socket, 'GameEnded');
-  proxy(socket, 'GameCreated');
-  proxy(socket, 'PlayerHit');
-  proxy(socket, 'WallHit');
+  proxy(socket, 'PlayerMoved');
 });
 
 function proxy(socket, event) {
