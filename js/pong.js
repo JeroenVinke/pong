@@ -2,7 +2,7 @@ var animate = window.requestAnimationFrame || window.webkitRequestAnimationFrame
         window.setTimeout(callback, 1000 / 60)
     };
 var canvas = document.createElement("canvas");
-var width = 400;
+var width = 600;
 var height = 600;
 canvas.width = width;
 canvas.height = height;
@@ -14,7 +14,7 @@ var ball = new Ball(200, 300);
 var keysDown = {};
 
 var render = function () {
-    context.fillStyle = "#FF00FF";
+    context.fillStyle = "#a4b6b3";
     context.fillRect(0, 0, width, height);
     player.render();
     computer.render();
@@ -43,7 +43,7 @@ function Paddle(x, y, width, height) {
 }
 
 Paddle.prototype.render = function () {
-    context.fillStyle = "#0000FF";
+    context.fillStyle = "#195153";
     context.fillRect(this.x, this.y, this.width, this.height);
 };
 

@@ -3,19 +3,16 @@
  */
 
 
-
-
-
-
-
 $( document ).ready(function() {
     console.log( "ready!" );
 
+    // navigation switch
     $("nav ul li").click(function(){
         $("section.s-h").css("display", "none");
         $($(this).data("target")).css("display", "block");
     });
 
+    // color preview div change color on selected
     $("#colorSelect").change(function () {
         switch($("#colorSelect").children("option").filter(":selected").text()) {
             case "red":
