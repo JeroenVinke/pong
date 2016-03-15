@@ -23,3 +23,33 @@ socket.on('PlayerJoined', function (data) {
 socket.on('GameStart', function (data) {
   console.log('GameStart', data);
 });
+
+$(function () {
+  var username = localStorage.getItem('username');
+  var color = localStorage.getItem('color');
+
+  if(!username) {
+    username = 'guest' + (Math.floor(Math.random() * 1000));
+    localStorage.setItem('username', username);
+  }
+
+  if(!color) {
+    color = 'green',
+    localStorage.setItem('color', color);
+  }
+
+
+  $("#username").val(username);
+  $("#colorSelect").val(color);
+  updateColor();
+
+
+
+  $("#colorSelect").change(function () {
+    localStorage.setItem('color', $("#colorSelect").val());
+  });
+
+  $("#username").change(function () {
+    localStorage.setItem('username', $("#username").val());
+  });
+});
