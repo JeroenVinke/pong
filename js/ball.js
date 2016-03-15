@@ -1,4 +1,6 @@
 function Ball(div) {
+  var canvas = document.createElement("canvas");
+  
   this.div = $("#ball");
   this.position = {
     y: 350,
