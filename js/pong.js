@@ -27,11 +27,9 @@ socket.on("GameStatus", function(data){
     if(data.player1.username == username){
         Iam = 'player1';
         socket.emit('Ready', 'player1');
-        console.log("color p1 "+Player1Color);
     } else {
         Iam = 'player2';
         socket.emit('Ready', 'player2');
-        console.log("color p2 "+Player2Color);
     }
 
     Player1Color = data.player1.color;
@@ -57,7 +55,6 @@ function resetGame() {
 
 
 socket.on('PlayerMoved', function (data) {
-    //player.update();
     computer.update(data);
 });
 
@@ -82,7 +79,6 @@ var render = function () {
 
 var update = function () {
     player.update();
-    //computer.update(ball);
     if(Iam == "player1") {
       ball.update(player.paddle, computer.paddle);
     } else {
@@ -106,7 +102,7 @@ function Paddle(x, y, width, height) {
 }
 
 Paddle.prototype.render = function () {
-    //context.fillStyle = "#195153";
+    context.fillStyle = this.color;
     context.fillRect(this.x, this.y, this.width, this.height);
 
 };
@@ -115,10 +111,6 @@ Paddle.prototype.move = function (x, y, player) {
     if(player==false){
         this.x = x;
         this.y = y;
-        // this.x_speed = this.x - x;
-
-        // console.log(this.x_speed);
-        // this.y_speed = this.y - y;
     } else {
         this.x += x;
         this.y += y;
@@ -147,40 +139,18 @@ Paddle.prototype.move = function (x, y, player) {
 function Computer() {
     if(Iam == 'player2') {
         this.paddle = new Paddle(380, 580, 50, 10);
-        this.paddle.fillStyle = Player2Color;
+        this.paddle.color = Player1Color;
     } else {
         this.paddle = new Paddle(380, 10, 50, 10);
-        this.paddle.fillStyle = Player1Color;
+        this.paddle.color = Player2Color;
     }
 }
 
 Computer.prototype.render = function () {
-    if(Iam == 'player2') {
-        context.fillStyle = Player2Color;
-    } else {
-        context.fillStyle = Player1Color;
-    }
     this.paddle.render();
 };
 
 Computer.prototype.update = function (playerMove) {
-    //  var x_pos = playerMove.x;
-    //  var diff = -((this.paddle.x + (this.paddle.width / 2)) - x_pos);
-    //  if (diff < 0 && diff < -4) {
-    //      diff = -5;
-    //  } else if (diff > 0 && diff > 4) {
-    //      diff = 5;
-    //  }
-    //  this.paddle.move(diff, 0, false);
-    //  if (this.paddle.x < 0) {
-    //      this.paddle.x = 0;
-    //  } else if (this.paddle.x + this.paddle.width > 400) {
-    //      this.paddle.x = 400 - this.paddle.width;
-    //  }
-
-    // this.paddle.x = playerMove.x;
-    // this.paddle.y = playerMove.y;
-
     this.paddle.x_speed = playerMove.x_speed;
     this.paddle.y_speed = playerMove.y_speed;
 
@@ -188,22 +158,16 @@ Computer.prototype.update = function (playerMove) {
 };
 
 function Player() {
-    if(Iam=='player1') {
+    if(Iam == 'player1') {
         this.paddle = new Paddle(380, 580, 50, 10);
-        this.paddle.fillStyle = Player1Color;
-
+        this.paddle.color = Player1Color;
     } else {
         this.paddle = new Paddle(380, 10, 50, 10);
-        this.paddle.fillStyle = Player2Color;
+        this.paddle.color = Player2Color;
     }
 }
 
 Player.prototype.render = function () {
-    if(Iam == 'player2') {
-        context.fillStyle = Player2Color;
-    } else {
-        context.fillStyle = Player1Color;
-    }
     this.paddle.render();
 };
 
