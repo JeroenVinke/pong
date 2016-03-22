@@ -77,9 +77,12 @@ Paddle.prototype.move = function (x, y, player) {
     if(player==false){
         this.x = x;
         this.y = y;
+        this.x_speed = this.x - x;
     } else {
         this.x += x;
         this.y += y;
+        this.x_speed = x;
+        this.y_speed = y;
         socket.emit("PlayerMoved", {
             x: this.x,
             y: this.y,
@@ -87,8 +90,7 @@ Paddle.prototype.move = function (x, y, player) {
             height: height
         });
     }
-    this.x_speed = x;
-    this.y_speed = y;
+
     if (this.x < 0) {
         this.x = 0;
         this.x_speed = 0;
