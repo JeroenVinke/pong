@@ -16,16 +16,24 @@ var computer = null;
 var ball = new Ball(400, 300);
 var Iam = "";
 var keysDown = {};
+var Player1Color = "";
+var Player2Color = "";
 
 socket.on("GameStatus", function(data){
     var username = localStorage.getItem("username");
     if(data.player1.username == username){
         Iam = 'player1';
         socket.emit('Ready', 'player1');
+        console.log("color p1 "+Player1Color);
     } else {
         Iam = 'player2';
         socket.emit('Ready', 'player2');
+        console.log("color p2 "+Player2Color);
     }
+
+    Player1Color = data.player1.color;
+    Player2Color = data.player2.color;
+
     player = new Player();
     computer = new Computer();
 });
@@ -37,10 +45,16 @@ socket.on('PlayerMoved', function (data) {
 });
 
 var render = function () {
-    context.fillStyle = "#a4b6b3";
+    context.shadowOffsetX = 0;
+    context.shadowOffsetY = 0;
+    context.shadowBlur = 10;
+    context.shadowColor = 'rgba(0, 0, 0, 0.1)';
+    context.fillStyle = "rgba(164, 182, 179, 0.1)";
     context.fillRect(0, 0, width, height);
     player.render();
     computer.render();
+    context.shadowBlur = 5;
+    context.shadowColor = 'rgba(0, 0, 0, 0.1)';
     ball.render();
 };
 
@@ -70,8 +84,9 @@ function Paddle(x, y, width, height) {
 }
 
 Paddle.prototype.render = function () {
-    context.fillStyle = "#195153";
+    //context.fillStyle = "#195153";
     context.fillRect(this.x, this.y, this.width, this.height);
+
 };
 
 Paddle.prototype.move = function (x, y, player) {
@@ -106,12 +121,19 @@ Paddle.prototype.move = function (x, y, player) {
 function Computer() {
     if(Iam == 'player2') {
         this.paddle = new Paddle(380, 580, 50, 10);
+        this.paddle.fillStyle = Player2Color;
     } else {
         this.paddle = new Paddle(380, 10, 50, 10);
+        this.paddle.fillStyle = Player1Color;
     }
 }
 
 Computer.prototype.render = function () {
+    if(Iam == 'player2') {
+        context.fillStyle = Player2Color;
+    } else {
+        context.fillStyle = Player1Color;
+    }
     this.paddle.render();
 };
 
@@ -139,12 +161,20 @@ Computer.prototype.update = function (playerMove) {
 function Player() {
     if(Iam=='player1') {
         this.paddle = new Paddle(380, 580, 50, 10);
+        this.paddle.fillStyle = Player1Color;
+
     } else {
         this.paddle = new Paddle(380, 10, 50, 10);
+        this.paddle.fillStyle = Player2Color;
     }
 }
 
 Player.prototype.render = function () {
+    if(Iam == 'player2') {
+        context.fillStyle = Player2Color;
+    } else {
+        context.fillStyle = Player1Color;
+    }
     this.paddle.render();
 };
 
@@ -171,7 +201,7 @@ function Ball(x, y) {
 Ball.prototype.render = function () {
     context.beginPath();
     context.arc(this.x, this.y, 5, 2 * Math.PI, false);
-    context.fillStyle = "#000000";
+    context.fillStyle = "#e03838";
     context.fill();
 };
 

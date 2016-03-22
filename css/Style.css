@@ -155,6 +155,11 @@ tbody tr{
     display:none;
 }
 
+/* -------------game styling----------------*/
+canvas{
+    margin: 30px;
+}
+
 
 /* -------------responsive----------------*/
 @media screen and (max-width: 890px) {
