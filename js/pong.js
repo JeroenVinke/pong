@@ -13,13 +13,16 @@ var context = canvas.getContext('2d');
 //var computer = new Computer();
 var player = null;
 var computer = null;
-var ball = new Ball(400, 300);
+var ball = null;
 var Iam = "";
 var keysDown = {};
 var Player1Color = "";
 var Player2Color = "";
 
 socket.on("GameStatus", function(data){
+    if(!data.player1 || !data.player2){
+        window.location = 'index.html';
+    }
     var username = localStorage.getItem("username");
     if(data.player1.username == username){
         Iam = 'player1';
@@ -34,14 +37,33 @@ socket.on("GameStatus", function(data){
     Player1Color = data.player1.color;
     Player2Color = data.player2.color;
 
-    player = new Player();
-    computer = new Computer();
+    resetGame();
 });
+
+socket.on('EndGame', function(){
+   alert('Spel gestopt!');
+    window.location = 'index.html';
+});
+
+function endGame() {
+  socket.emit('EndGame');
+}
+
+function resetGame() {
+  player = new Player();
+  computer = new Computer();
+  ball = new Ball(400, 300);
+}
 
 
 socket.on('PlayerMoved', function (data) {
-    player.update();
+    //player.update();
     computer.update(data);
+});
+
+
+socket.on('ResetGame', function () {
+  resetGame();
 });
 
 var render = function () {
@@ -94,6 +116,8 @@ Paddle.prototype.move = function (x, y, player) {
         this.x = x;
         this.y = y;
         // this.x_speed = this.x - x;
+
+        // console.log(this.x_speed);
         // this.y_speed = this.y - y;
     } else {
         this.x += x;
@@ -104,7 +128,9 @@ Paddle.prototype.move = function (x, y, player) {
             x: this.x,
             y: this.y,
             width: width,
-            height: height
+            height: height,
+            x_speed: this.x_speed,
+            y_speed: this.y_speed
         });
     }
 
@@ -154,6 +180,9 @@ Computer.prototype.update = function (playerMove) {
 
     // this.paddle.x = playerMove.x;
     // this.paddle.y = playerMove.y;
+
+    this.paddle.x_speed = playerMove.x_speed;
+    this.paddle.y_speed = playerMove.y_speed;
 
     this.paddle.move(playerMove.x, playerMove.y, false);
 };
@@ -222,6 +251,7 @@ Ball.prototype.update = function (paddle1, paddle2) {
     }
 
     if (this.y < 0 || this.y > 600) {
+        socket.emit('ResetGame');
         this.x_speed = 0;
         this.y_speed = 3;
         this.x = 400;

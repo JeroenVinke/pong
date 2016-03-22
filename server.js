@@ -16,16 +16,21 @@ io.listen(server);
 var game = {
 };
 
-io.sockets.on("connection", function(socket) {
+io.sockets.on('connection', function(socket) {
   console.log("user connected: " + socket.id);
 
   proxy(socket, 'PlayerMoved');
+  proxy(socket, 'ResetGame');
+  socket.emit('GameStatus', game);
 
   socket.on('GameStatus', function () {
     socket.emit('GameStatus', game);
   });
 
-  socket.emit('GameStatus', game);
+  socket.on('EndGame', function () {
+    game = {};
+    io.sockets.emit('EndGame');
+  });
 
   socket.on('Ready', function(data){
     if(data == 'player1'){
@@ -36,6 +41,7 @@ io.sockets.on("connection", function(socket) {
 
     if(game.player1.ready=='ready'&&game.player2.ready=='ready') {
       io.sockets.emit('GameStart', game);
+      game.ready=true;
       console.log('GameStart');
     }
   })
