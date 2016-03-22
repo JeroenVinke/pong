@@ -17,19 +17,17 @@ var game = {
 };
 
 io.sockets.on('connection', function(socket) {
-  socket.on('disconnect', function(){
-    if(game.ready==true) {
-      game = {};
-      io.sockets.emit('EndGame');
-    }
-    console.log("user disconnected: " + socket.id);
-  });
   console.log("user connected: " + socket.id);
 
   proxy(socket, 'PlayerMoved');
 
   socket.on('GameStatus', function () {
     socket.emit('GameStatus', game);
+  });
+
+  socket.on('EndGame', function () {
+    game = {};
+    io.sockets.emit('EndGame');
   });
 
   socket.emit('GameStatus', game);

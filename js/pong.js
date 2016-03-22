@@ -13,7 +13,7 @@ var context = canvas.getContext('2d');
 //var computer = new Computer();
 var player = null;
 var computer = null;
-var ball = new Ball(400, 300);
+var ball = null;
 var Iam = "";
 var keysDown = {};
 
@@ -30,14 +30,23 @@ socket.on("GameStatus", function(data){
         socket.emit('Ready', 'player2');
     }
 
-    player = new Player();
-    computer = new Computer();
+    resetGame();
 });
 
 socket.on('EndGame', function(){
    alert('Spel gestopt!');
     window.location = 'index.html';
 });
+
+function endGame() {
+  socket.emit('EndGame');
+}
+
+function resetGame() {
+  player = new Player();
+  computer = new Computer();
+  ball = new Ball(400, 300);
+}
 
 
 socket.on('PlayerMoved', function (data) {
