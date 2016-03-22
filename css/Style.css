@@ -74,7 +74,7 @@ section {
     color: #FFFFFF;
 }
 
-.game{
+.game,.test{
     display:none;
 }
 
@@ -126,6 +126,13 @@ button:hover{
 .right{
     width:50%;
     float:right;
+}
+
+h1,h2,h3,h4,p{
+    font-family: 'Arcade', Fallback, sans-serif;
+}
+p{
+    font-family: sans-serif;
 }
 
 /* -------------table styling------------------*/
