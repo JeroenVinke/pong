@@ -67,6 +67,6 @@ io.sockets.on('connection', function(socket) {
 function proxy(socket, event) {
   socket.on(event, function (data) {
     console.log(event, JSON.stringify(data));
-    socket.broadcast.emit(event, data);
+    io.sockets.emit(event, data);
   });
 }
