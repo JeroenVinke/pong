@@ -4,7 +4,7 @@ var animate = window.requestAnimationFrame || window.webkitRequestAnimationFrame
         window.setTimeout(callback, 1000 / 60)
     };
 var canvas = document.createElement("canvas");
-var width = 600;
+var width = 800;
 var height = 600;
 canvas.width = width;
 canvas.height = height;
@@ -13,7 +13,7 @@ var context = canvas.getContext('2d');
 //var computer = new Computer();
 var player = null;
 var computer = null;
-var ball = new Ball(200, 300);
+var ball = new Ball(400, 300);
 var Iam = "";
 var keysDown = {};
 
@@ -30,9 +30,6 @@ socket.on("GameStatus", function(data){
     computer = new Computer();
 });
 
-function restart() {
-  
-}
 
 socket.on('PlayerMoved', function (data) {
     player.update();
@@ -99,8 +96,8 @@ Paddle.prototype.move = function (x, y, player) {
     if (this.x < 0) {
         this.x = 0;
         this.x_speed = 0;
-    } else if (this.x + this.width > 400) {
-        this.x = 400 - this.width;
+    } else if (this.x + this.width > 800) {
+        this.x = 800 - this.width;
         this.x_speed = 0;
     }
 
@@ -108,9 +105,9 @@ Paddle.prototype.move = function (x, y, player) {
 
 function Computer() {
     if(Iam == 'player2') {
-        this.paddle = new Paddle(175, 580, 50, 10);
+        this.paddle = new Paddle(380, 580, 50, 10);
     } else {
-        this.paddle = new Paddle(175, 10, 50, 10);
+        this.paddle = new Paddle(380, 10, 50, 10);
     }
 }
 
@@ -141,9 +138,9 @@ Computer.prototype.update = function (playerMove) {
 
 function Player() {
     if(Iam=='player1') {
-        this.paddle = new Paddle(175, 580, 50, 10);
+        this.paddle = new Paddle(380, 580, 50, 10);
     } else {
-        this.paddle = new Paddle(175, 10, 50, 10);
+        this.paddle = new Paddle(380, 10, 50, 10);
     }
 }
 
@@ -189,15 +186,15 @@ Ball.prototype.update = function (paddle1, paddle2) {
     if (this.x - 5 < 0) {
         this.x = 5;
         this.x_speed = -this.x_speed;
-    } else if (this.x + 5 > 400) {
-        this.x = 395;
+    } else if (this.x + 5 > 800) {
+        this.x = 795;
         this.x_speed = -this.x_speed;
     }
 
     if (this.y < 0 || this.y > 600) {
         this.x_speed = 0;
         this.y_speed = 3;
-        this.x = 200;
+        this.x = 400;
         this.y = 300;
     }
 
