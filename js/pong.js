@@ -30,6 +30,10 @@ socket.on("GameStatus", function(data){
     computer = new Computer();
 });
 
+function restart() {
+  
+}
+
 socket.on('PlayerMoved', function (data) {
     player.update();
     computer.update(data);
@@ -77,7 +81,8 @@ Paddle.prototype.move = function (x, y, player) {
     if(player==false){
         this.x = x;
         this.y = y;
-        this.x_speed = this.x - x;
+        // this.x_speed = this.x - x;
+        // this.y_speed = this.y - y;
     } else {
         this.x += x;
         this.y += y;
