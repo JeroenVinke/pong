@@ -79,6 +79,8 @@ Paddle.prototype.move = function (x, y, player) {
         this.x = x;
         this.y = y;
         // this.x_speed = this.x - x;
+
+        // console.log(this.x_speed);
         // this.y_speed = this.y - y;
     } else {
         this.x += x;
@@ -89,7 +91,9 @@ Paddle.prototype.move = function (x, y, player) {
             x: this.x,
             y: this.y,
             width: width,
-            height: height
+            height: height,
+            x_speed: this.x_speed,
+            y_speed: this.y_speed
         });
     }
 
@@ -132,6 +136,9 @@ Computer.prototype.update = function (playerMove) {
 
     // this.paddle.x = playerMove.x;
     // this.paddle.y = playerMove.y;
+
+    this.paddle.x_speed = playerMove.x_speed;
+    this.paddle.y_speed = playerMove.y_speed;
 
     this.paddle.move(playerMove.x, playerMove.y, false);
 };
