@@ -41,7 +41,7 @@ socket.on('EndGame', function(){
 
 
 socket.on('PlayerMoved', function (data) {
-    player.update();
+    //player.update();
     computer.update(data);
 });
 
@@ -208,6 +208,7 @@ Ball.prototype.update = function (paddle1, paddle2) {
     }
 
     if (this.y < 0 || this.y > 600) {
+        socket.emit('ResetGame');
         this.x_speed = 0;
         this.y_speed = 3;
         this.x = 400;

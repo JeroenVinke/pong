@@ -17,7 +17,7 @@ var game = {
 };
 
 io.sockets.on('connection', function(socket) {
-  socket.on('disconnect', function(){
+  socket.on('EndGame', function(){
     if(game.ready==true) {
       game = {};
       io.sockets.emit('EndGame');
