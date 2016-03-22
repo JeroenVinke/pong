@@ -20,6 +20,8 @@ io.sockets.on('connection', function(socket) {
   console.log("user connected: " + socket.id);
 
   proxy(socket, 'PlayerMoved');
+  proxy(socket, 'ResetGame');
+  socket.emit('GameStatus', game);
 
   socket.on('GameStatus', function () {
     socket.emit('GameStatus', game);
@@ -29,8 +31,6 @@ io.sockets.on('connection', function(socket) {
     game = {};
     io.sockets.emit('EndGame');
   });
-
-  socket.emit('GameStatus', game);
 
   socket.on('Ready', function(data){
     if(data == 'player1'){
