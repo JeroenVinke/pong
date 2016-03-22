@@ -32,7 +32,7 @@ socket.on("GameStatus", function(data){
 
 socket.on('PlayerMoved', function (data) {
     computer.update(data);
-    console.log(data);
+    ball.update(player.paddle, computer.paddle);
 });
 
 var render = function () {
@@ -70,7 +70,7 @@ Paddle.prototype.render = function () {
 };
 
 Paddle.prototype.move = function (x, y, player) {
-    if(player==true){
+    if(player==false){
         this.x = x;
         this.y = y;
     } else {
@@ -108,19 +108,24 @@ Computer.prototype.render = function () {
 };
 
 Computer.prototype.update = function (playerMove) {
-     var x_pos = playerMove.x;
-     var diff = -((this.paddle.x + (this.paddle.width / 2)) - x_pos);
-     if (diff < 0 && diff < -4) {
-         diff = -5;
-     } else if (diff > 0 && diff > 4) {
-         diff = 5;
-     }
-     this.paddle.move(diff, 0, false);
-     if (this.paddle.x < 0) {
-         this.paddle.x = 0;
-     } else if (this.paddle.x + this.paddle.width > 400) {
-         this.paddle.x = 400 - this.paddle.width;
-     }
+    //  var x_pos = playerMove.x;
+    //  var diff = -((this.paddle.x + (this.paddle.width / 2)) - x_pos);
+    //  if (diff < 0 && diff < -4) {
+    //      diff = -5;
+    //  } else if (diff > 0 && diff > 4) {
+    //      diff = 5;
+    //  }
+    //  this.paddle.move(diff, 0, false);
+    //  if (this.paddle.x < 0) {
+    //      this.paddle.x = 0;
+    //  } else if (this.paddle.x + this.paddle.width > 400) {
+    //      this.paddle.x = 400 - this.paddle.width;
+    //  }
+
+    // this.paddle.x = playerMove.x;
+    // this.paddle.y = playerMove.y;
+
+    this.paddle.move(playerMove.x, playerMove.y, false);
 };
 
 function Player() {
