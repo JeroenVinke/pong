@@ -20,7 +20,12 @@ io.sockets.on('connection', function(socket) {
   console.log("user connected: " + socket.id);
 
   proxy(socket, 'PlayerMoved');
-  proxy(socket, 'ResetGame');
+
+
+  socket.on('ResetGame', function () {
+    io.sockets.emit('ResetGame');
+  });
+  
   socket.emit('GameStatus', game);
 
   socket.on('GameStatus', function () {
@@ -67,6 +72,6 @@ io.sockets.on('connection', function(socket) {
 function proxy(socket, event) {
   socket.on(event, function (data) {
     console.log(event, JSON.stringify(data));
-    io.sockets.emit(event, data);
+    socket.broadcast.emit(event, data);
   });
 }
