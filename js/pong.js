@@ -31,8 +31,8 @@ socket.on("GameStatus", function(data){
 });
 
 socket.on('PlayerMoved', function (data) {
+    player.update();
     computer.update(data);
-    ball.update(player.paddle, computer.paddle);
 });
 
 var render = function () {
@@ -46,7 +46,11 @@ var render = function () {
 var update = function () {
     player.update();
     //computer.update(ball);
-    ball.update(player.paddle, computer.paddle);
+    if(Iam == "player1") {
+      ball.update(player.paddle, computer.paddle);
+    } else {
+      ball.update(computer.paddle, player.paddle);
+    }
 };
 
 var step = function () {
