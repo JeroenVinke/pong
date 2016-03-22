@@ -18,6 +18,9 @@ var Iam = "";
 var keysDown = {};
 
 socket.on("GameStatus", function(data){
+    if(!data.player1 || !data.player2){
+        window.location = 'index.html';
+    }
     var username = localStorage.getItem("username");
     if(data.player1.username == username){
         Iam = 'player1';
@@ -26,8 +29,14 @@ socket.on("GameStatus", function(data){
         Iam = 'player2';
         socket.emit('Ready', 'player2');
     }
+
     player = new Player();
     computer = new Computer();
+});
+
+socket.on('EndGame', function(){
+   alert('Spel gestopt!');
+    window.location = 'index.html';
 });
 
 
