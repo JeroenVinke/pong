@@ -162,34 +162,96 @@ tbody tr{
     display:none;
 }
 
+/*********************************************************
+                      Table styling
+*********************************************************/
+
+.datagrid {
+    background: #fff;
+    overflow: hidden;
+}
+
+.datagrid table {
+    border-collapse: collapse;
+    text-align: left;
+    width: 100%; }
+
+.datagrid table td, .datagrid table th {
+    padding: 8px 5px; }
+
+.datagrid table img {
+    width: 50px;
+    width: 50px; }
+
+
+.datagrid table thead th:first-child {
+    border: none; }
+
+.datagrid table tbody td {
+    border-left: 1px solid #195153;
+    font-size: 18px;
+    font-weight: normal; }
+
+.datagrid table tbody .alt td {
+    background: #abbdba;
+    color: #0d4144; }
+
+.datagrid table tbody td:first-child {
+    border-left: none; }
+
+.datagrid table tbody tr:last-child td {
+    border-bottom: none; }
+
+
 /* -------------game styling----------------*/
 canvas{
     margin: 30px;
 }
 
 
+
 /* -------------responsive----------------*/
 @media screen and (max-width: 890px) {
 
-#logo{
-    height: 60px;
-    width: 60px;
-}
+    #logo {
+        height: 60px;
+        width: 60px;
+    }
 
-#name{
-    font-size: 30px;
-}
+    #name {
+        font-size: 30px;
+    }
 
-.left, .right{
-    width:100%;
-    clear:both;
-    float:none;
-}
+    .left, .right {
+        width: 100%;
+        clear: both;
+        float: none;
+    }
+
     th, td {
         font-size: 0.7em;
     }
-    input,select{
+
+    input, select {
         width: 80%;
+    }
+
+    .datagrid table tbody td {
+        font-size: 0.6em !important;
+        padding: 2px;
+    }
+
+    .datagrid table thead th {
+        font-size: 0.7em !important;
+    }
+    .datagrid img {
+        display:none;
+    }
+
+    nav ul li {
+        padding-top:25px;
+        padding:10px;
+        font-size:15px;
     }
 
 }
