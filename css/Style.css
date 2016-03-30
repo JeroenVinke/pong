@@ -12,7 +12,7 @@ body{
     background-size:cover;
 }
 
-#content {
+main {
     width:80%;
     padding-left:10%;
 }
@@ -26,6 +26,23 @@ nav{
     height:60px;
     background-color: #195153;
     color:#FFFFFF;
+}
+
+footer {
+    width:70%;
+    margin-left:10%;
+    height:60px;
+    background-color: #195153;
+    color:#FFFFFF;
+    padding: 15px 5%;
+
+}
+
+footer p {
+    font-size: 25px;
+    font-family: 'digi', Fallback, sans-serif;
+    margin:0px;
+    margin-top:10px;
 }
 
 nav ul {
@@ -252,6 +269,11 @@ canvas{
         padding-top:25px;
         padding:10px;
         font-size:15px;
+    }
+
+    footer {
+
+    height:110px;
     }
 
 }
