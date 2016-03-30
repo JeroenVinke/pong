@@ -1,7 +1,7 @@
 var socket = io.connect("http://localhost:8000");
 
 var animate = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || function (callback) {
-        window.setTimeout(callback, 1000 / 60)
+        window.setTimeout(callback, 1000 / 60);
     };
 var canvas = document.createElement("canvas");
 var width = 800;
@@ -39,18 +39,18 @@ socket.on("GameStatus", function(data){
 });
 
 socket.on('EndGame', function(){
-   alert('Spel gestopt!');
+    alert('Spel gestopt!');
     window.location = 'index.html';
 });
 
 function endGame() {
-  socket.emit('EndGame');
+    socket.emit('EndGame');
 }
 
 function resetGame() {
-  player = new Player();
-  computer = new Computer();
-  ball = new Ball(400, 300);
+    player = new Player();
+    computer = new Computer();
+    ball = new Ball(400, 300);
 }
 
 
@@ -60,7 +60,7 @@ socket.on('PlayerMoved', function (data) {
 
 
 socket.on('ResetGame', function () {
-  resetGame();
+    resetGame();
 });
 
 var render = function () {
@@ -80,9 +80,9 @@ var render = function () {
 var update = function () {
     player.update();
     if(Iam == "player1") {
-      ball.update(player.paddle, computer.paddle);
+        ball.update(player.paddle, computer.paddle);
     } else {
-      ball.update(computer.paddle, player.paddle);
+        ball.update(computer.paddle, player.paddle);
     }
 };
 
@@ -108,7 +108,7 @@ Paddle.prototype.render = function () {
 };
 
 Paddle.prototype.move = function (x, y, player) {
-    if(player==false){
+    if(player===false){
         this.x = x;
         this.y = y;
     } else {

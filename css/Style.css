@@ -39,7 +39,7 @@ footer {
 }
 
 footer p {
-    font-size: 25px;
+    font-size: 20px;
     font-family: 'digi', Fallback, sans-serif;
     margin:0px;
     margin-top:10px;
@@ -191,7 +191,9 @@ tbody tr{
 .datagrid table {
     border-collapse: collapse;
     text-align: left;
-    width: 100%; }
+    width: 100%;
+    letter-spacing: 0.1px;
+}
 
 .datagrid table td, .datagrid table th {
     padding: 8px 5px; }
