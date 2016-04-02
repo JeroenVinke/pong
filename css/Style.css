@@ -15,6 +15,7 @@ body{
 main {
     width:80%;
     padding-left:10%;
+    display: block;
 }
 
 a {
@@ -279,4 +280,3 @@ canvas{
     }
 
 }
-

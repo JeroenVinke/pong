@@ -1,14 +1,15 @@
 var http = require('http');
 var io = require("socket.io")();
 var server = http.createServer( handler );
-server.listen(8000);
-console.log("listening on port 8000");
+var port = 8000;
+server.listen(port);
+console.log("listening on port " + port);
 
 function handler (request, response ) {
- response.writeHead(200, { "Content-Type": "text/plain" });
- response.write("Hello World");
- response.end();
- console.log("Response sent..");
+  response.writeHead(200, { "Content-Type": "text/plain" });
+  response.write("<a href='localhost:8080'>Spel</a>. Hiervoor moet 'node client.js' draaien");
+  response.end();
+  console.log("Response sent..");
 }
 
 io.listen(server);
@@ -25,7 +26,7 @@ io.sockets.on('connection', function(socket) {
   socket.on('ResetGame', function () {
     io.sockets.emit('ResetGame');
   });
-  
+
   socket.emit('GameStatus', game);
 
   socket.on('GameStatus', function () {

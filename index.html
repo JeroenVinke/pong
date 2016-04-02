@@ -1,168 +1,178 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Pong</title>
-  <link rel="stylesheet" type="text/css" href="css/Style.css">
-  <link rel="stylesheet" type="text/css" href="css/loading.css">
-  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js"></script>
-  <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
-  <script src="js/splashscreen.js"></script>
-  <script src="js/index.js"></script>
-</head>
-
-<body>
-  <main>
-  <header>
-    <div id="logo"><i class="fa fa-circle"></i></div>
-    <div id="name">Pong multiplayer</div>
-  </header>
-  <nav>
-    <ul>
-      <li class="navInfo" data-target="section.info.s-h">My info</li>
-        <li class="navGame" data-target="section.game.s-h">Join game</li>
-      <li class="navGame" data-target="section.test.s-h">Test info</li>
-    </ul>
-  </nav>
-    <section class="info s-h">
-      <form>
-        <label>Username</label><input type="text" id="username">
-        <label>Color</label><select id="colorSelect"><option value="green">green</option><option value="blue">blue</option><option value="yellow">yellow</option><option value="red">red</option></select>
-        <div id="colorPreview"></div>
-      </form>
-    </section>
-    <section class="game s-h">
-      <div class="left join">
-        <button onclick="joinGame()">Join game</button>
-      </div>
-    <div class="right">
-      <table id="playerTable">
-        <thead>
-        <tr>
-          <th>Player number</th>
-          <th>username</th>
-          <th>color</th>
-        </tr>
-        </thead>
-        <tbody id="playerTableBody">
-          <tr>
-            <td>1</td>
-            <td>Edd92</td>
-            <td>Green</td>
-          </tr>
-        </tbody>
-      </table>
-    </div></section>
-    <section class="test s-h">
-      <h2>testtabel</h2>
-      <div class='datagrid'><table><thead>
-      <tr>
-        <th>Opdracht</th>
-        <th colspan="7">Eindopdracht NodeJs</th>
-      </tr>
-      </thead>
-        <tbody>
-        <tr>
-          <td><b>datum</b></td>
-          <td colspan="3">30-03-2016</td>
-          <td colspan="2"><b>aant. http requests</b></td>
-          <td colspan="2"> 23</td>
-        </tr>
-        <tr class="alt">
-          <td><b>Valide HTML5</b></td>
-          <td colspan="3"><i class="fa fa-check"></i></td>
-          <td colspan="2"><b>grootte</b></td>
-          <td colspan="2" > 130 kb</td>
-        </tr>
-        <tr>
-          <td><b>Valide CSS</b></td>
-          <td colspan="3"><i class="fa fa-check"></i></td>
-          <td colspan="2"><b>laadtijd</b></td>
-          <td colspan="2" > 0.3 s</td>
-        </tr>
-        <tr class="alt">
-          <td><b>Valide Js</b></td>
-          <td colspan="3"><i class="fa fa-check"></i></td>
-          <td colspan="2"><b>Responsive</b></td>
-          <td colspan="2" ><i class="fa fa-times"></i></td>
-        </tr>
-        <tr>
-          <td><b>Browser</b></td>
-          <td colspan="3" style="text-align: center;"><img src="images/ie.png" alt="internet explorer"></td>
-          <td style="text-align: center;"><img src="images/firefox.png" alt="firefox" ></td>
-          <td style="text-align: center;"><img src="images/chrome.png" alt="chrome"></td>
-          <td style="text-align: center;"><img src="images/opera.png" alt="opera"></td>
-          <td style="text-align: center;"><img src="images/edge.png" alt="edge"></td>
-        </tr>
-        <tr class="alt">
-          <td><b>Versie</b></td>
-          <td>IE 9 </td>
-          <td>IE 10</td>
-          <td>IE 11</td>
-          <td>Firefox</td>
-          <td>Chrome</td>
-          <td>Opera</td>
-          <td>Edge</td>
-        </tr>
-        <tr>
-          <td><b>Result</b></td>
-          <td><i class="fa fa-check"></i></td>
-          <td><i class="fa fa-check"></i></td>
-          <td><i class="fa fa-check"></i></td>
-          <td><i class="fa fa-check"></i></td>
-          <td><i class="fa fa-check"></i></td>
-          <td><i class="fa fa-check"></i></td>
-          <td><i class="fa fa-check"></i></td>
-        </tr>
-        </tbody>
-      </table>
-      </div>
-      <h4>Opmerkingen</h4>
-      <p>De game is niet responsive, hier hebben wij bewust voor gekozen, omdat het spel werkt met pixels en movement, wanneer je het spel responsive wil maken, komt het beeld tussen de twee clients niet meer overeen. Daarnaast wordt er gewerkt met pijltjestoetsen, dus zou je de game op mobiele apparaten niet kunnen spelen. </p>
-      <h4>Gebruikte validatietools</h4>
-      <p><b>Javascript</b> http://jshint.com/</p>
-      <p><b>HTML</b>https://validator.w3.org/</p>
-      <p><b>CSS</b> https://jigsaw.w3.org/</p>
-      <h2>testcases</h2>
-      <div class='datagrid'><table><thead>
-      <tr>
-        <th>nr</th>
-        <th>use case</th>
-        <th>verwachtte resultaat</th>
-        <th></th>
-      </tr>
-      </thead>
-        <tbody>
-        <tr>
-          <td>1</td>
-          <td>starten game</td>
-          <td>drukt op join game, als player 1: wachten, als player 2: start samen game </td>
-          <td><i class="fa fa-check"></i></td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>verlaten game</td>
-          <td>verlaat het spel, andere speler krijgt melding en wordt naar index gestuurd </td>
-          <td><i class="fa fa-check"></i></td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>Kiezen naam en kleur</td>
-          <td>kies kleur uit dropdown, vult naam in, wordt opgeslagen in localstorage, wanneer spelt start wordt de paddle gekleurd met gekozen kleur</td>
-          <td><i class="fa fa-check"></i></td>
-        </tr>
-
-        </tbody>
-      </table>
-      </div>
-      </section>
-  </main>
-  <footer>
-      <P class="left">Eindopdracht Client technologie</P>
-    <P class="right">&copy; Gazar Ajroemjan, Jeroen Vinke, Edwin van Halem</P>
-    </footer>
-</body>
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Pong</title>
+      <link rel="stylesheet" type="text/css" href="css/Style.css">
+      <link rel="stylesheet" type="text/css" href="css/loading.css">
+      <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js"></script>
+      <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+      <script src="js/splashscreen.js"></script>
+      <script src="js/index.js"></script>
+   </head>
+   <body>
+      <main>
+         <header>
+            <!-- header -->
+            <div id="logo"><i class="fa fa-circle"></i></div>
+            <div id="name">Pong multiplayer</div>
+         </header>
+         <nav>
+            <!-- navigation bar -->
+            <ul>
+               <li class="navInfo" data-target="section.info.s-h">My info</li>
+               <li class="navGame" data-target="section.game.s-h">Join game</li>
+               <li class="navGame" data-target="section.test.s-h">Test info</li>
+            </ul>
+         </nav>
+         <section class="info s-h">
+            <form>
+               <label>Username</label><input type="text" id="username">
+               <label>Color</label>
+               <select id="colorSelect">
+                  <option value="green">green</option>
+                  <option value="blue">blue</option>
+                  <option value="yellow">yellow</option>
+                  <option value="red">red</option>
+               </select>
+               <div id="colorPreview"></div>
+            </form>
+         </section>
+         <section class="game s-h">
+            <div class="left join">
+               <button onclick="joinGame()">Join game</button>
+            </div>
+            <div class="right">
+               <table id="playerTable">
+                  <thead>
+                     <tr>
+                        <th>Player number</th>
+                        <th>username</th>
+                        <th>color</th>
+                     </tr>
+                  </thead>
+                  <tbody id="playerTableBody">
+                     <tr>
+                        <td>1</td>
+                        <td>Edd92</td>
+                        <td>Green</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </section>
+         <section class="test s-h">
+            <h2>testtabel</h2>
+            <div class='datagrid'>
+               <table>
+                  <thead>
+                     <tr>
+                        <th>Opdracht</th>
+                        <th colspan="7">Eindopdracht NodeJs</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td><b>datum</b></td>
+                        <td colspan="3">30-03-2016</td>
+                        <td colspan="2"><b>aant. http requests</b></td>
+                        <td colspan="2"> 23</td>
+                     </tr>
+                     <tr class="alt">
+                        <td><b>Valide HTML5</b></td>
+                        <td colspan="3"><i class="fa fa-check"></i></td>
+                        <td colspan="2"><b>grootte</b></td>
+                        <td colspan="2" > 130 kb</td>
+                     </tr>
+                     <tr>
+                        <td><b>Valide CSS</b></td>
+                        <td colspan="3"><i class="fa fa-check"></i></td>
+                        <td colspan="2"><b>laadtijd</b></td>
+                        <td colspan="2" > 0.3 s</td>
+                     </tr>
+                     <tr class="alt">
+                        <td><b>Valide Js</b></td>
+                        <td colspan="3"><i class="fa fa-check"></i></td>
+                        <td colspan="2"><b>Responsive</b></td>
+                        <td colspan="2" ><i class="fa fa-times"></i></td>
+                     </tr>
+                     <tr>
+                        <td><b>Browser</b></td>
+                        <td colspan="3" style="text-align: center;"><img src="images/ie.png" alt="internet explorer"></td>
+                        <td style="text-align: center;"><img src="images/firefox.png" alt="firefox" ></td>
+                        <td style="text-align: center;"><img src="images/chrome.png" alt="chrome"></td>
+                        <td style="text-align: center;"><img src="images/opera.png" alt="opera"></td>
+                        <td style="text-align: center;"><img src="images/edge.png" alt="edge"></td>
+                     </tr>
+                     <tr class="alt">
+                        <td><b>Versie</b></td>
+                        <td>IE 9 </td>
+                        <td>IE 10</td>
+                        <td>IE 11</td>
+                        <td>Firefox</td>
+                        <td>Chrome</td>
+                        <td>Opera</td>
+                        <td>Edge</td>
+                     </tr>
+                     <tr>
+                        <td><b>Result</b></td>
+                        <td><i class="fa fa-check"></i></td>
+                        <td><i class="fa fa-check"></i></td>
+                        <td><i class="fa fa-check"></i></td>
+                        <td><i class="fa fa-check"></i></td>
+                        <td><i class="fa fa-check"></i></td>
+                        <td><i class="fa fa-check"></i></td>
+                        <td><i class="fa fa-check"></i></td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+            <h4>Opmerkingen</h4>
+            <p>De game is niet responsive, hier hebben wij bewust voor gekozen, omdat het spel werkt met pixels en movement, wanneer je het spel responsive wil maken, komt het beeld tussen de twee clients niet meer overeen. Daarnaast wordt er gewerkt met pijltjestoetsen, dus zou je de game op mobiele apparaten niet kunnen spelen. </p>
+            <h4>Gebruikte validatietools</h4>
+            <p><b>Javascript</b> http://jshint.com/</p>
+            <p><b>HTML</b>https://validator.w3.org/</p>
+            <p><b>CSS</b> https://jigsaw.w3.org/</p>
+            <h2>testcases</h2>
+            <div class='datagrid'>
+               <table>
+                  <thead>
+                     <tr>
+                        <th>nr</th>
+                        <th>use case</th>
+                        <th>verwachtte resultaat</th>
+                        <th></th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td>1</td>
+                        <td>starten game</td>
+                        <td>drukt op join game, als player 1: wachten, als player 2: start samen game </td>
+                        <td><i class="fa fa-check"></i></td>
+                     </tr>
+                     <tr>
+                        <td>2</td>
+                        <td>verlaten game</td>
+                        <td>verlaat het spel, andere speler krijgt melding en wordt naar index gestuurd </td>
+                        <td><i class="fa fa-check"></i></td>
+                     </tr>
+                     <tr>
+                        <td>3</td>
+                        <td>Kiezen naam en kleur</td>
+                        <td>kies kleur uit dropdown, vult naam in, wordt opgeslagen in localstorage, wanneer spelt start wordt de paddle gekleurd met gekozen kleur</td>
+                        <td><i class="fa fa-check"></i></td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </section>
+      </main>
+      <footer>
+         <p class="left">Eindopdracht Client technologie</p>
+         <p class="right">&copy; Gazar Ajroemjan, Jeroen Vinke, Edwin van Halem</p>
+      </footer>
+   </body>
 </html>
