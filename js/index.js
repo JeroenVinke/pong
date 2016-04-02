@@ -32,8 +32,7 @@ function updateColor() {
 }
 
 
-
-
+// open socketio connection to the server
 var socket = io.connect("http://localhost:8000");
 
 function joinGame() {
@@ -82,30 +81,35 @@ function goToGame() {
 
 
 $(function () {
+  // get username and color from localstorage
   var username = localStorage.getItem('username');
   var color = localStorage.getItem('color');
 
+  // default value for username
   if(!username) {
     username = 'guest' + (Math.floor(Math.random() * 1000));
     localStorage.setItem('username', username);
   }
 
+  // default color for username
   if(!color) {
     color = 'green',
     localStorage.setItem('color', color);
   }
 
 
+  // fill username textfield and color dropdown
   $("#username").val(username);
   $("#colorSelect").val(color);
-  updateColor();
+  updateColor(); // render the color preview
 
 
-
+  // update localstorage when user selects different color
   $("#colorSelect").change(function () {
     localStorage.setItem('color', $("#colorSelect").val());
   });
 
+  // update localstorage when user changes the username
   $("#username").change(function () {
     localStorage.setItem('username', $("#username").val());
   });
