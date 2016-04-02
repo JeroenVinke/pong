@@ -1,12 +1,3 @@
-@font-face {
-    font-family: 'arcade';
-    src: url('../fonts/ARCADECLASSIC.TTF');
-}
-@font-face {
-    font-family: 'digi';
-    src: url('../fonts/DS-DIGI.TTF');
-}
-
 body{
     background-image:url(../images/background.png);
     background-size:cover;
@@ -279,4 +270,13 @@ canvas{
     height:110px;
     }
 
+}
+
+@font-face {
+    font-family: 'arcade';
+    src: url('../fonts/ARCADECLASSIC.TTF');
+}
+@font-face {
+    font-family: 'digi';
+    src: url('../fonts/ARCADECLASSIC.TTF');
 }
